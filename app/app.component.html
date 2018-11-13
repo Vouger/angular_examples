@@ -1,0 +1,43 @@
+<div class="container">
+    <form [formGroup]="stateForm">
+        <div>
+            <div class="col-md-11">
+                <app-activity-dropdown [stateForm]="stateForm" (selectActivity)="selectActivity($event)"></app-activity-dropdown>
+            </div>
+
+            <div class="col-md-1" *ngIf="show.count">
+                <mat-form-field class="activity_count">
+                    <span matPrefix>
+                        <mat-icon class="count_icon">clear</mat-icon> &nbsp;
+                    </span>
+                    
+                    <input matInput formControlName="activity_count" type="number" id="myNumber"/>
+                </mat-form-field> 
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <mat-radio-group (change)="onTypeChange($event)" *ngIf="show.type" formControlName="activity_type"> 
+                <mat-radio-button value="sport">Sport</mat-radio-button> 
+                <mat-radio-button value="movie">Movie</mat-radio-button> 
+                <mat-radio-button value="book">Book</mat-radio-button> 
+            </mat-radio-group>
+            
+            <ng-template #container></ng-template>
+
+            <div class="form-group" *ngIf="show.button">
+                <mat-form-field>
+                    <input matInput formControlName="activity_date" [matDatepicker]="picker" placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <button mat-raised-button (click)="addActivity()" color="primary" *ngIf="show.button">Add</button>
+        </div>
+    </form> 
+    
+    <div class="loading-indicator" *ngIf="show.loading">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+</div>

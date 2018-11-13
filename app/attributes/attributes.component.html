@@ -1,0 +1,7 @@
+<div [formGroup]="formControl">
+    <div class="form-group" *ngFor="let attr of attributes_list">
+        <mat-form-field>
+            <input matInput formControlName="{{attr.id}}" placeholder="{{attr.name}}" />
+        </mat-form-field>
+    </div>
+</div>

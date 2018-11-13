@@ -1,0 +1,13 @@
+<div [formGroup]="stateForm">
+  <mat-form-field>
+    <input type="text" matInput placeholder="Write activity..." required formControlName="activity_name" [matAutocomplete]="autoGroup"/>
+      <mat-autocomplete #autoGroup="matAutocomplete">
+        <mat-optgroup *ngFor="let activity of activitiesOptions | async" [label]="activity.type">
+          <mat-option *ngFor="let record of activity.records" [value]="record.name" (onSelectionChange)="activitySelect(record, activity.type)">
+            {{ record.name }}
+          </mat-option>
+      </mat-optgroup>
+    </mat-autocomplete>
+    <mat-hint>Movie, book or sport</mat-hint>
+  </mat-form-field> 
+</div>
